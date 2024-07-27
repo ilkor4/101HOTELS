@@ -1,10 +1,11 @@
 import Vue from 'vue'
+import App from './app/App.vue'
+import components from './shared/ui/index.js'
 
-//Main pages
-import App from './views/app.vue'
-
+components.forEach((component) => {
+    Vue.component(component.name, component);
+})
 
 const app = new Vue({
-    el: '#app',
-    components: { App }
-});
+    render: h => h(App)
+}).$mount('#app');

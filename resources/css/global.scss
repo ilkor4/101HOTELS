@@ -1,0 +1,42 @@
+:root {
+    /* Глобальные цвета */
+    --color_interface_modal_bg: #fff;
+    --color_interface_bg: #f8f4f2;
+    --color_primary: #ff4141;
+    --color_text_light: #fff;
+    --color_text_dark: #001A34;
+    --color_text_grey: #667685;
+
+    /* Глобальные переменные шрифтов: */
+    --font_family: "JetBrains", arial, sans-serif;
+
+    --font_text_s: 400 14px/20px var(--font_family);
+    --font_text_m: 700 24px/30px var(--font_family);
+    --font_text_l: 36px/40px var(--font_family);
+
+    /* Размеры: */
+
+    /* Максимальная ширина элементов: */
+    --max_width_container: 1280px;
+
+    /* Анимации и транзиции: */
+    --base_transition: all .6s ease;
+
+    /* Прозрачность: */
+    --base_opacity: .6;
+
+    /* Скругление: */
+    --base_border_radius: 6px;
+
+    /* Тени: */
+    --base_box_shadow: 2px 2px 4px var(--color_text_grey);
+
+    /* Брейкпоинты: */
+    --breakpoint_desktop_wide: 1440px;
+    --breakpoint_desktop: 1200px;
+    --breakpoint_tablet: 992px;
+    --breakpoint_mobile: 576px;
+
+    /* Отступы: */
+    --base_padding: 5%;
+}

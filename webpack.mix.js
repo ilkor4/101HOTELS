@@ -25,6 +25,14 @@ mix.options({
 
 mix.webpackConfig({
     mode: "development",
+    module: {
+        rules: [
+            {
+                test: /\.svg$/,
+                loader: 'vue-svg-loader',
+            },
+        ],
+    },
     devtool: "inline-source-map",
     devServer: {
         // disableHostCheck: true,
