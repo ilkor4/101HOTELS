@@ -21,18 +21,10 @@ mix.options({
         host: 'localhost',  // mysite.test is my local domain used for testing
         port: 3000,
     }
- });
+});
 
 mix.webpackConfig({
     mode: "development",
-    module: {
-        rules: [
-            {
-                test: /\.svg$/,
-                loader: 'vue-svg-loader',
-            },
-        ],
-    },
     devtool: "inline-source-map",
     devServer: {
         // disableHostCheck: true,
@@ -43,7 +35,7 @@ mix.webpackConfig({
         host: '0.0.0.0',
         port: 3000,
         proxy: {
-          '*': 'http://webserver:8080'
+            '*': 'http://webserver:8080'
         }
     },
 });

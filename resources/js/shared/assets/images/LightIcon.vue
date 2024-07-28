@@ -1,5 +1,5 @@
 <template>
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" class="icon"
          width="24" height="24" viewBox="0 0 512.000000 512.000000"
          preserveAspectRatio="xMidYMid meet">
 
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
-
+.icon {
+    fill: var(--color_text_grey)
+}
 </style>

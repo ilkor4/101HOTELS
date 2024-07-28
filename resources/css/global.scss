@@ -10,9 +10,9 @@
     /* Глобальные переменные шрифтов: */
     --font_family: "JetBrains", arial, sans-serif;
 
-    --font_text_s: 400 14px/20px var(--font_family);
-    --font_text_m: 700 24px/30px var(--font_family);
-    --font_text_l: 36px/40px var(--font_family);
+    --font_text_s: 400 14px/1.4 var(--font_family);
+    --font_text_m: 700 20px/1.4 var(--font_family);
+    --font_text_l: 24px/1.4 var(--font_family);
 
     /* Размеры: */
 
@@ -29,14 +29,10 @@
     --base_border_radius: 6px;
 
     /* Тени: */
-    --base_box_shadow: 2px 2px 4px var(--color_text_grey);
-
-    /* Брейкпоинты: */
-    --breakpoint_desktop_wide: 1440px;
-    --breakpoint_desktop: 1200px;
-    --breakpoint_tablet: 992px;
-    --breakpoint_mobile: 576px;
+    --base_box_shadow: .6px .6px 6px var(--color_text_grey);
 
     /* Отступы: */
     --base_padding: 5%;
+
+    background-color: var(--color_interface_bg);
 }

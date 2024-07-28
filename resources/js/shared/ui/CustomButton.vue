@@ -1,12 +1,20 @@
 <template>
-    <button :class="$attrs.class" class="button">
+    <button
+        @click="handleClick"
+        :class="$attrs.class"
+        class="button">
         <slot></slot>
     </button>
 </template>
 
 <script>
 export default {
-    name: 'CustomButton'
+    name: 'CustomButton',
+    methods: {
+        handleClick() {
+            this.$emit('click')
+        }
+    }
 }
 </script>
 
@@ -14,10 +22,10 @@ export default {
 .button {
     padding: 5px 10px;
     color: var(--color_text_dark);
+    font: var(--font_text_s);
     border-radius: var(--base_border_radius);
     border: none;
     outline: none;
-    font: var(--font_text_s);
     transition: var(--base_transition);
 
     &_primary {
@@ -31,6 +39,17 @@ export default {
     &_secondary {
         background: var(--color_interface_modal_bg);
         color: var(--color_primary);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &_tertiary {
+        background: var(--color_interface_modal_bg);
+        color: var(--color_text_grey);
         text-transform: uppercase;
         font-weight: 700;
         letter-spacing: 1px;
