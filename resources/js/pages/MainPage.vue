@@ -1,15 +1,17 @@
 <template>
     <main class="content">
         <CommentList :comments="comments"/>
+        <CreateForm/>
     </main>
 </template>
 
 <script>
 import CommentList from "../entities/Comment/CommentList.vue";
 import axios from "axios";
+import CreateForm from "../features/CreateForm.vue";
 
 export default {
-    components: {CommentList},
+    components: {CreateForm, CommentList},
     data: () => ({
         comments: []
     }),

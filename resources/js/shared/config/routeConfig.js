@@ -11,7 +11,7 @@ const routes = [
         component: MainPage
     },
     {
-        path: '/comment/:id',
+        path: '/comments/:id',
         component: CommentPage
     }
 ]

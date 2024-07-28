@@ -29,6 +29,7 @@ export default {
     transition: var(--base_transition);
 
     &_primary {
+        padding: 10px 15px;
         background: var(--color_primary);
         color: var(--color_text_light);
         text-transform: uppercase;
@@ -61,6 +62,11 @@ export default {
     &:hover {
         opacity: var(--base_opacity);
         cursor: pointer;
+    }
+
+    &_primary:hover {
+        opacity: 1;
+        transform: scale(1.1);
     }
 }
 </style>
