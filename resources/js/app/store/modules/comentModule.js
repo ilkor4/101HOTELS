@@ -6,7 +6,6 @@ export const commentModule = {
         comments: [],
         currentComment: null,
         selectedSort: '',
-        isLoading: false,
         totalPages: 0,
         currentPage: 1,
         commentsOnPage: 3
@@ -32,9 +31,6 @@ export const commentModule = {
         setCurrentComment(state, comment) {
             state.currentComment = comment;
         },
-        setIsLoading(state, isLoading) {
-            state.isLoading = isLoading;
-        },
         setSelectedSort(state, selectedSort) {
             state.selectedSort = selectedSort;
         },
@@ -48,16 +44,12 @@ export const commentModule = {
     actions: {
         async fetchGetComments({commit, state}) {
             try {
-                commit('setIsLoading', true);
-
                 const response = await axios.get('/api/comments/');
 
                 commit('setComments', response.data)
                 commit('setTotalPages', Math.ceil(state.comments.length / state.commentsOnPage));
             } catch (err) {
                 console.log(err)
-            } finally {
-                commit('setIsLoading', false);
             }
         },
         async fetchGetComment({commit, state}, id) {
