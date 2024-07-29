@@ -5,12 +5,23 @@ export const commentModule = {
     state: () => ({
         comments: [],
         currentComment: null,
-        isLoading: false,
         selectedSort: '',
+        totalPages: 0,
+        currentPage: 1,
+        commentsOnPage: 3
     }),
     getters: {
         sortedComments(state) {
             return sortArray([...state.comments], state.selectedSort)
+        },
+        sortedAndCutComments(state, getters) {
+            const start = (state.currentPage - 1) * state.commentsOnPage;
+            const end = start + state.commentsOnPage
+
+            return getters
+                .sortedComments
+                .slice(start, end);
+
         }
     },
     mutations: {
@@ -26,19 +37,22 @@ export const commentModule = {
         setSelectedSort(state, selectedSort) {
             state.selectedSort = selectedSort;
         },
+        setTotalPages(state, totalPages) {
+            state.totalPages = totalPages;
+        },
+        setCurrentPage(state, currentPage) {
+            state.currentPage = currentPage;
+        },
     },
     actions: {
-        async fetchGetComments({state, commit}) {
-            commit('setIsLoading', true);
-
+        async fetchGetComments({commit, state}) {
             try {
                 const response = await axios.get('/api/comments/');
 
-                commit('setComments', response.data);
+                commit('setComments', response.data)
+                commit('setTotalPages', Math.ceil(state.comments.length / state.commentsOnPage));
             } catch (err) {
                 console.log(err)
-            } finally {
-                commit('setIsLoading', false);
             }
         },
         async fetchGetComment({commit, state}, id) {

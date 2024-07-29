@@ -22,6 +22,7 @@
                 :key="comment.id"
                 :comment="comment"/>
         </transition-group>
+        <CommentsPagination class="comments__pagination"/>
     </section>
     <h2
         class="not-found-title"
@@ -37,9 +38,10 @@ import CommentItem from "./CommentItem.vue";
 import CustomSelect from "../../shared/ui/CustomSelect.vue";
 import {sortOptions} from "./lib/constants";
 import {mapMutations} from "vuex";
+import CommentsPagination from "./lib/CommentsPagination.vue";
 
 export default {
-    components: {CustomSelect, CommentItem},
+    components: {CommentsPagination, CustomSelect, CommentItem},
     data: () => ({
         sortOptions
     }),
@@ -80,6 +82,10 @@ export default {
     &__title {
         font: var(--font_text_m);
         color: var(--color_text_grey);
+    }
+
+    &__pagination {
+        align-self: center;
     }
 }
 

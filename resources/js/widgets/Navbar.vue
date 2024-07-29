@@ -2,7 +2,9 @@
     <header class="navbar">
         <LogoIcon @click="$router.replace('/')"/>
         <div class="navbar__buttons">
-            <CustomButton class="button_tertiary">
+            <CustomButton
+                @click="toggleTheme"
+                class="button_tertiary">
                 <LightIcon class="navbar__light"/>
                 Тема
             </CustomButton>
@@ -19,18 +21,32 @@
 <script>
 import LogoIcon from '../shared/assets/images/LogoIcon.vue'
 import LightIcon from "../shared/assets/images/LightIcon.vue";
+import {mapMutations, mapState} from "vuex";
 
 export default {
     components: {
         LightIcon,
         LogoIcon
     },
+    computed: {
+        ...mapState({
+            theme: (state) => state.theme.theme
+        })
+    },
     methods: {
+        ...mapMutations({
+            setTheme: "theme/setTheme"
+        }),
         scrollToSection(id) {
             const element = document.getElementById(id);
             if (element) {
                 element.scrollIntoView({behavior: 'smooth'});
             }
+        },
+        toggleTheme() {
+            this.theme === 'light'
+                ? this.setTheme('dark')
+                : this.setTheme('light')
         }
     }
 }

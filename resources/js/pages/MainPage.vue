@@ -1,6 +1,6 @@
 <template>
     <main class="content">
-        <CommentList :comments="sortedComments"/>
+        <CommentList :comments="sortedAndCutComments"/>
         <CreateForm/>
     </main>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import CommentList from "../entities/Comment/CommentList.vue";
 import CreateForm from "../features/CreateForm.vue";
-import {mapActions, mapGetters, mapState} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     components: {
@@ -16,11 +16,8 @@ export default {
         CommentList
     },
     computed: {
-        ...mapState({
-            comments: (state) => state.comment.comments,
-        }),
         ...mapGetters({
-            sortedComments: "comment/sortedComments"
+            sortedAndCutComments: "comment/sortedAndCutComments"
         })
     },
     methods: {
