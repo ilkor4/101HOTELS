@@ -16,7 +16,7 @@ export default {
 
 <style lang="scss">
 .app {
-    padding: 20px;
+    padding: 120px 20px 20px;
     box-sizing: border-box;
     width: 100%;
     min-height: 100vh;
@@ -24,5 +24,11 @@ export default {
     flex-direction: column;
     align-items: center;
     gap: 30px;
+}
+
+@media screen and (max-width: 576px) {
+    .app {
+        padding: 200px 20px 20px;
+    }
 }
 </style>

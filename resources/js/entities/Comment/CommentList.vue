@@ -6,7 +6,11 @@
         <h2 class="comments__title">
             Все комментарии:
         </h2>
-        <transition-group name="comments__comment-list comments-list" tag="ul">
+        <transition-group
+            class="comments__list"
+            name="comments-list"
+            tag="ul"
+        >
             <CommentItem
                 @remove="$emit('remove', comment)"
                 v-for="comment in comments"
@@ -43,6 +47,13 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    &__list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
     &__title {
         font: var(--font_text_m);

@@ -13,13 +13,25 @@
         </div>
         <div class="comment__buttons">
             <CustomButton
+                v-if="!Boolean(hasEditButton)"
                 class="button_tertiary"
                 @click="$router.push(`/comments/${comment.id}`)"
             >
                 <ShowIcon/>
                 Открыть
             </CustomButton>
-            <CustomButton class="button_secondary">
+            <CustomButton
+                v-if="Boolean(hasEditButton)"
+                class="button_tertiary"
+                @click="openModal"
+            >
+                <EditIcon/>
+                Редактировать
+            </CustomButton>
+            <CustomButton
+                @click="fetchDeleteComment(comment.id)"
+                class="button_secondary"
+            >
                 <DeleteIcon/>
                 Удалить
             </CustomButton>
@@ -31,14 +43,28 @@
 import CustomButton from "../../shared/ui/CustomButton.vue";
 import DeleteIcon from "../../shared/assets/images/DeleteIcon.vue";
 import ShowIcon from "../../shared/assets/images/ShowIcon.vue";
+import {mapActions} from "vuex";
+import EditIcon from "../../shared/assets/images/EditIcon.vue";
 
 export default {
-    components: {ShowIcon, DeleteIcon, CustomButton},
+    components: {EditIcon, ShowIcon, DeleteIcon, CustomButton},
     props: {
         comment: {
             type: Object,
             required: true
+        },
+        hasEditButton: {
+            type: Boolean,
+            default: false
+        },
+        openModal: {
+            type: Function
         }
+    },
+    methods: {
+        ...mapActions({
+            fetchDeleteComment: "comment/fetchDeleteComment"
+        })
     }
 }
 </script>

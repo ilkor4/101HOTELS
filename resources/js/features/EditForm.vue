@@ -1,49 +1,43 @@
 <template>
-    <section id="create-form" class="form">
-        <h2 class="form__title">
-            Поделитесь своими впечатлениями!
-        </h2>
-        <form
-            name="edit-form"
-            @submit.prevent
-            class="form__container"
-        >
-            <fieldset class="form__wrapper">
-                <CustomInput
-                    name="name"
-                    v-model="name"
-                    required
-                    placeholder="Введите ваше имя"/>
-                <DatePicker
-                    placeholder="Дата"
-                    class="vue2-datepicker"
-                    v-model="date"
-                    lang="ru"
-                    valueType="format"
-                />
-            </fieldset>
+    <form
+        name="edit-form"
+        @submit.prevent
+        class="form"
+    >
+        <fieldset class="form__wrapper">
             <CustomInput
-                id="text"
-                v-model="text"
+                name="name"
+                v-model="name"
                 required
-                placeholder="Введите ваш комментарий"/>
-            <CustomButton
-                @click="onSubmit"
-                class="button_primary"
-                type="submit"
-            >
-                Создать
-            </CustomButton>
-        </form>
-    </section>
+                placeholder="Введите ваше имя"/>
+            <DatePicker
+                placeholder="Дата"
+                class="vue2-datepicker"
+                v-model="date"
+                lang="ru"
+                valueType="format"
+            />
+        </fieldset>
+        <CustomInput
+            id="text"
+            v-model="text"
+            required
+            placeholder="Введите ваш комментарий"/>
+        <CustomButton
+            @click="onSubmit"
+            class="button_primary"
+            type="submit"
+        >
+            Редактировать
+        </CustomButton>
+    </form>
 </template>
 
 <script>
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
 import ru from 'vue2-datepicker/locale/ru';
-import {v4 as generateId} from 'uuid';
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 
 console.log(ru); // Чтобы пустой импорт не удалялся
 
@@ -51,24 +45,47 @@ export default {
     components: {
         DatePicker
     },
+    props: {
+        closeModal: {
+            type: Function,
+            required: true
+        }
+    },
     data: () => ({
         name: '',
         text: '',
-        date: null,
+        date: '',
     }),
+    watch: {
+        currentComment: {
+            handler(newValue) {
+                this.name = newValue.name;
+                this.text = newValue.text;
+                this.date = newValue.date;
+            },
+            deep: true,
+            immediate: true
+        }
+    },
+    computed: {
+        ...mapState({
+            currentComment: (state) => state.comment.currentComment
+        })
+    },
     methods: {
         ...mapActions({
-            fetchCreateComment: "comment/fetchCreateComment"
+            fetchEditComment: "comment/fetchEditComment"
         }),
         onSubmit() {
             const comment = {
-                id: generateId(),
+                id: this.currentComment.id,
                 name: this.name,
                 text: this.text,
                 date: this.date
             };
 
-            this.fetchCreateComment(comment);
+            this.fetchEditComment(comment);
+            this.closeModal();
         }
     }
 }

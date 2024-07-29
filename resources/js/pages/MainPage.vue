@@ -1,35 +1,32 @@
 <template>
     <main class="content">
-        <CommentList :comments="comments"/>
+        <CommentList :comments="$store.state.comment.comments"/>
         <CreateForm/>
     </main>
 </template>
 
 <script>
 import CommentList from "../entities/Comment/CommentList.vue";
-import axios from "axios";
 import CreateForm from "../features/CreateForm.vue";
+import {mapActions, mapState} from "vuex";
 
 export default {
-    components: {CreateForm, CommentList},
-    data: () => ({
-        comments: []
-    }),
+    components: {
+        CreateForm,
+        CommentList
+    },
+    computed: {
+        ...mapState({
+            comments: (state) => state.comment.comments,
+        }),
+    },
     methods: {
-        async fetchGetComments() {
-            try {
-                const response = await axios.get('/api/comments/')
-
-                this.comments = response.data;
-                console.log(this.comments)
-
-            } catch (err) {
-                console.log(err)
-            }
-        }
+        ...mapActions({
+            fetchGetComments: "comment/fetchGetComments",
+        })
     },
     mounted() {
-        this.fetchGetComments()
+        this.fetchGetComments();
     }
 }
 </script>

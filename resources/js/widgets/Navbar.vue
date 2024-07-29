@@ -1,12 +1,15 @@
 <template>
     <header class="navbar">
-        <LogoIcon/>
+        <LogoIcon @click="$router.replace('/')"/>
         <div class="navbar__buttons">
             <CustomButton class="button_tertiary">
                 <LightIcon class="navbar__light"/>
                 Тема
             </CustomButton>
-            <CustomButton class="button_primary">
+            <CustomButton
+                @click="scrollToSection('create-form')"
+                class="button_primary"
+            >
                 Создать комментарий
             </CustomButton>
         </div>
@@ -21,15 +24,26 @@ export default {
     components: {
         LightIcon,
         LogoIcon
+    },
+    methods: {
+        scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({behavior: 'smooth'});
+            }
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
 .navbar {
+    margin: 0 auto;
     padding: 10px 15px;
     box-sizing: border-box;
-    width: 100%;
+    width: calc(100% - 40px);
+    position: fixed;
+    top: 20px;
     max-width: var(--max_width_container);
     display: flex;
     align-items: center;
