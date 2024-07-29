@@ -1,7 +1,7 @@
 <template>
     <form
-        name="edit-form"
         @submit.prevent
+        name="edit-form"
         class="form"
     >
         <fieldset class="form__wrapper">

@@ -4,8 +4,8 @@
             Поделитесь своими впечатлениями!
         </h2>
         <form
-            name="edit-form"
             @submit.prevent
+            name="edit-form"
             class="form__container"
         >
             <fieldset class="form__wrapper">
@@ -42,7 +42,6 @@
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
 import ru from 'vue2-datepicker/locale/ru';
-import {v4 as generateId} from 'uuid';
 import {mapActions} from "vuex";
 
 console.log(ru); // Чтобы пустой импорт не удалялся
@@ -62,13 +61,16 @@ export default {
         }),
         onSubmit() {
             const comment = {
-                id: generateId(),
                 name: this.name,
                 text: this.text,
                 date: this.date
             };
 
             this.fetchCreateComment(comment);
+
+            this.name = '';
+            this.date = null;
+            this.text = '';
         }
     }
 }

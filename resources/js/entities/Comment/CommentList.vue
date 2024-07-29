@@ -3,19 +3,24 @@
         class="comments"
         v-if="comments.length > 0"
     >
-        <h2 class="comments__title">
-            Все комментарии:
-        </h2>
+        <div class="comments__wrapper">
+            <h2 class="comments__title">
+                Все комментарии:
+            </h2>
+            <CustomSelect
+                :options="sortOptions"
+                @input="setSelectedSort"
+            />
+        </div>
         <transition-group
             class="comments__list"
             name="comments-list"
             tag="ul"
         >
             <CommentItem
-                @remove="$emit('remove', comment)"
                 v-for="comment in comments"
                 :key="comment.id"
-                :comment="comment "/>
+                :comment="comment"/>
         </transition-group>
     </section>
     <h2
@@ -29,15 +34,26 @@
 <script>
 
 import CommentItem from "./CommentItem.vue";
+import CustomSelect from "../../shared/ui/CustomSelect.vue";
+import {sortOptions} from "./lib/constants";
+import {mapMutations} from "vuex";
 
 export default {
-    components: {CommentItem},
+    components: {CustomSelect, CommentItem},
+    data: () => ({
+        sortOptions
+    }),
     props: {
         comments: {
             type: Array,
             required: true
         }
-    }
+    },
+    methods: {
+        ...mapMutations({
+            setSelectedSort: "comment/setSelectedSort"
+        })
+    },
 }
 </script>
 
@@ -47,6 +63,12 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     &__list {
         width: 100%;
@@ -84,5 +106,13 @@ export default {
 
 .comments-list-move {
     transition: transform 0.7s ease;
+}
+
+@media screen and (max-width: 576px) {
+    .comments__wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+
 }
 </style>

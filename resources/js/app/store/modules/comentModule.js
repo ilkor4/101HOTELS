@@ -1,4 +1,5 @@
 import axios from "axios";
+import {sortArray} from "../helpers/sortArray";
 
 export const commentModule = {
     state: () => ({
@@ -9,11 +10,7 @@ export const commentModule = {
     }),
     getters: {
         sortedComments(state) {
-            return [...state.comments]
-                .sort((itemA, itemB) => {
-                    return itemA[state.selectedSort]
-                        ?.localeCompare(itemB[state.selectedSort])
-                })
+            return sortArray([...state.comments], state.selectedSort)
         }
     },
     mutations: {
@@ -78,7 +75,6 @@ export const commentModule = {
                 console.log(err)
             }
         }
-
     },
     namespaced: true
 }
