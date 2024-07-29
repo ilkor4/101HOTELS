@@ -5,9 +5,7 @@
             :key="pageNumber"
             @click="setCurrentPage(pageNumber)"
             class="page__item"
-            :class="{
-                'page__item_active': currentPage === pageNumber
-            }"
+            :class="{'page__item_active': currentPage === pageNumber}"
         >
             {{ pageNumber }}
         </li>

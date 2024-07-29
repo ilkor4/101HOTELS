@@ -1,9 +1,7 @@
 <template>
     <div
         class="app"
-        :class="{
-            'app_dark': theme === 'dark'
-        }"
+        :class="{'app_dark': theme === 'dark'}"
     >
         <Navbar/>
         <router-view/>

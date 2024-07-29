@@ -119,6 +119,5 @@ export default {
         flex-direction: column;
         gap: 15px;
     }
-
 }
 </style>
